@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html lang="it" data-bs-theme="dark">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moviomania</title>
-    
-    <!-- Metodo 1: Collegamento Standard Online (CDN) -->
+    <!-- Bootstrap CDN Leggero -->
     <link href="https://jsdelivr.net" rel="stylesheet">
     
-    <!-- Metodo 2: Compilazione Locale Laravel Vite -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Stile di protezione locale per forzare la modalità scura immediata se internet salta -->
+    <style>
+        body { background-color: #212529 !important; color: #f8f9fa !important; font-family: sans-serif; }
+        .navbar-custom { background-color: #2c3034; padding: 15px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .brand-logo { color: #ffc107 !important; font-weight: bold; font-size: 24px; text-decoration: none; }
+        .nav-links a { color: #ffffff !important; margin-left: 20px; text-decoration: none; font-weight: 600; }
+        .nav-links a.btn-custom { color: #ffc107 !important; border: 1px solid #ffc107; padding: 5px 15px; rounded: 5px; }
+    </style>
 </head>
-<body class="bg-dark text-white">
+<body>
 
-    <!-- Barra di navigazione scura ufficiale Bootstrap -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5 shadow">
-      <div class="container">
-        <a class="navbar-brand text-warning fw-bold fs-3" href="/">Moviomania</a>
-        <div class="navbar-nav ms-auto flex-row gap-3">
-          <a class="nav-link text-white fw-semibold" href="/">Tutti gli Articoli</a>
-          <a class="nav-link text-warning fw-bold border border-warning rounded px-3" href="/articolo/crea">+ Crea Articolo</a>
+    <!-- Navbar d'emergenza che garantisce la grafica di Aulab -->
+    <div class="navbar-custom">
+        <div style="max-width: 1320px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" class="brand-logo">Moviomania</a>
+            <div class="nav-links">
+                <a href="/">Tutti gli Articoli</a>
+                <a href="/articolo/crea" class="btn-custom">+ Crea Articolo</a>
+            </div>
         </div>
-      </div>
-    </nav>
+    </div>
 
-    <!-- Contenitore centrale dove compaiono il Form e l'Elenco -->
-    <div class="container">
+    <!-- Contenitore unico per il form e la lista -->
+    <div style="max-width: 1320px; margin: 0 auto; padding: 0 15px;">
         {{ $slot }}
     </div>
 
-    <!-- Script Javascript per i componenti Bootstrap -->
-    <script src="https://jsdelivr.net"></script>
 </body>
 </html>

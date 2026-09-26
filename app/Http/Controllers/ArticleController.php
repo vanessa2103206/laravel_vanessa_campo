@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use Illuminate\Http\Request;
+use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -18,20 +18,22 @@ class ArticleController extends Controller
         return view('article.create');
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'subtitle' => 'required',
-            'body' => 'required',
-        ]);
+        $path = null;
+        
+        // Controlliamo se nel form è stata passata l'immagine
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('articles', 'public');
+        }
 
         Article::create([
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'body' => $request->body,
+            'image' => $path, // Salva il percorso esatto
         ]);
 
-        return redirect()->route('article.index')->with('success', 'Articolo creato con successo!');
+        return redirect()->route('article.index')->with('success', 'Articolo e immagine inseriti con successo!');
     }
 }
